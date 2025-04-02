@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://5ia6xl3v47wh"]
+
+[ext_resource type="PackedScene" uid="uid://bp0x765bj3tyk" path="res://scenes/game_objects/obstacles/obstacle.tscn" id="1_0vtc1"]
+
+[sub_resource type="Gradient" id="Gradient_0vtc1"]
+colors = PackedColorArray(0.65098, 0.337255, 0.282353, 1, 0.65098, 0.337255, 0.282353, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f8ngd"]
+gradient = SubResource("Gradient_0vtc1")
+width = 40
+height = 40
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0vtc1"]
+size = Vector2(40, 40)
+
+[node name="Obstacle" instance=ExtResource("1_0vtc1")]
+destructible = true
+
+[node name="Sprite2D" parent="." index="0"]
+texture = SubResource("GradientTexture2D_f8ngd")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_0vtc1")

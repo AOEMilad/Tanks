@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://01yv35kp7on7"]
+
+[ext_resource type="Script" uid="uid://coltslb0xysgy" path="res://scripts/projectiles/projectile.gd" id="1_rbi7x"]
+
+[sub_resource type="Gradient" id="Gradient_rbi7x"]
+colors = PackedColorArray(1, 0.717647, 0.211765, 1, 1, 0.717647, 0.211765, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_saugj"]
+gradient = SubResource("Gradient_rbi7x")
+width = 16
+height = 16
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rbi7x"]
+radius = 8.0
+
+[node name="Projectile" type="Area2D"]
+script = ExtResource("1_rbi7x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_saugj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rbi7x")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

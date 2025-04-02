@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7ftrqsn3ldvh"]
+
+[ext_resource type="PackedScene" uid="uid://bmwp05ngxs2vu" path="res://scenes/game_objects/obstacles/wall.tscn" id="1_yautc"]
+[ext_resource type="PackedScene" uid="uid://bo81okb0j0wsk" path="res://scenes/game_objects/tanks/player_tank.tscn" id="2_yautc"]
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1024.0
+offset_bottom = 600.0
+color = Color(0.866667, 0.713726, 0.458824, 1)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Top Wall" parent="Walls" instance=ExtResource("1_yautc")]
+position = Vector2(512, 20)
+scale = Vector2(25.6, 1)
+
+[node name="Bottom Wall" parent="Walls" instance=ExtResource("1_yautc")]
+position = Vector2(512, 580)
+scale = Vector2(25.6, 1)
+
+[node name="Left Wall" parent="Walls" instance=ExtResource("1_yautc")]
+position = Vector2(20, 300)
+scale = Vector2(1, 13)
+
+[node name="Right Wall" parent="Walls" instance=ExtResource("1_yautc")]
+position = Vector2(1004, 300)
+scale = Vector2(1, 13)
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="TankBase" parent="Entities" instance=ExtResource("2_yautc")]
+position = Vector2(512, 500)
