@@ -51,12 +51,22 @@ func _physics_process(delta):
 func handle_movement(delta):
 	if !can_move:
 		return
-	
-	var input_vector = get_movement_input()
+
+	var input_vector = get_movement_input().normalized()
+
 	if input_vector != Vector2.ZERO:
-		velocity = velocity.move_toward(input_vector * max_speed, acceleration * delta)
+		# Forward direction is the tank's current facing direction
+		var forward = Vector2.UP.rotated(rotation)
+
+		# Determine if input is aligned with forward (positive) or backward (negative)
+		var direction_sign = sign(forward.dot(input_vector))
+
+		# Move in the current rotation direction * forward or backward
+		var move_direction = forward * direction_sign
+		velocity = velocity.move_toward(move_direction * max_speed, acceleration * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+
 
 func handle_rotation(delta):
 	if !can_move:
