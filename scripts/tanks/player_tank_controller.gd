@@ -11,7 +11,7 @@ func update_cannon_aim():
 	var mouse_pos = get_global_mouse_position()
 	var cannon_global_pos = cannon.global_position
 	var aim_direction = (mouse_pos - cannon_global_pos).normalized()
-	cannon.rotation = aim_direction.angle()
+	cannon.global_rotation = aim_direction.angle()
 
 func get_movement_input() -> Vector2:
 	var input_vector = Vector2.ZERO

@@ -67,17 +67,16 @@ func handle_rotation(delta):
 
 # Cannon aiming logic
 func update_cannon_aim():
-	pass
-	#if is_player:
-		#var mouse_pos = get_global_mouse_position()
-		#var direction = (mouse_pos - cannon.global_position).normalized()
-		#cannon.rotation = direction.angle()
-	#else:
-		## AI targets the nearest player tank
-		#var player_tank = get_nearest_player_tank()
-		#if player_tank:
-			#var direction = (player_tank.global_position - cannon.global_position).normalized()
-			#cannon.rotation = direction.angle()
+	if is_player:
+		var mouse_pos = get_global_mouse_position()
+		var direction = (mouse_pos - cannon.global_position).normalized()
+		cannon.rotation = direction.angle()
+	else:
+		# AI targets the nearest player tank
+		var player_tank = get_nearest_player_tank()
+		if player_tank:
+			var direction = (player_tank.global_position - cannon.global_position).normalized()
+			cannon.rotation = direction.angle()
 
 # Finds the nearest player-controlled tank for AI targeting
 func get_nearest_player_tank() -> Node2D:
