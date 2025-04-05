@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Tanks"
-run/main_scene="uid://c7ftrqsn3ldvh"
+run/main_scene="uid://du04ieytmjwa3"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

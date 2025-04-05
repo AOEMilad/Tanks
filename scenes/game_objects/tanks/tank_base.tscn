@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgjf8prybv3r"]
+[gd_scene load_steps=8 format=3 uid="uid://cgjf8prybv3r"]
 
 [ext_resource type="Script" uid="uid://c6tu0kwh5qiy5" path="res://scripts/tanks/tank_controller.gd" id="1_37hrw"]
 
@@ -18,6 +18,8 @@ colors = PackedColorArray(0.187608, 0.400563, 0.187422, 1, 0.188235, 0.4, 0.1882
 gradient = SubResource("Gradient_nwsy1")
 width = 40
 height = 16
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_37hrw"]
 
 [node name="TankBase" type="CharacterBody2D"]
 script = ExtResource("1_37hrw")
@@ -45,5 +47,9 @@ position = Vector2(40, 0)
 
 [node name="ReloadTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_interval = 0.05
+replication_config = SubResource("SceneReplicationConfig_37hrw")
 
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
