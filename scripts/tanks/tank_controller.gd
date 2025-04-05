@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 class_name TankController
 
+# Multiplayer
+@onready var sync = $MultiplayerSynchronizer
+
 # Tank movement
 @export var max_speed: float = 150.0
 @export var acceleration: float = 500.0
@@ -34,6 +37,15 @@ var can_move: bool = true
 @onready var reload_timer = $ReloadTimer
 
 func _ready():
+	# Only allow the client that owns this tank to control it
+	if not is_multiplayer_authority():
+		set_process(false)
+		set_physics_process(false)
+		return
+	
+	# Assign multiplayer authority if not already set
+	set_multiplayer_authority(multiplayer.get_unique_id())
+	
 	cooldown_timer.wait_time = fire_cooldown
 	cooldown_timer.one_shot = true
 	cooldown_timer.timeout.connect(_on_cooldown_timer_timeout)
@@ -66,7 +78,6 @@ func handle_movement(delta):
 		velocity = velocity.move_toward(move_direction * max_speed, acceleration * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-
 
 func handle_rotation(delta):
 	if !can_move:
